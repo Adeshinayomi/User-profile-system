@@ -1,9 +1,8 @@
 import { Header } from './component/Header'
 import { Users } from './component/Users'
-import './App.css'
+import { Modal } from './component/Modal'
 import firstImage from './assets/images/first-image.jpg'
 import secondImage from './assets/images/second-image.jpg'
-// import thirdImage from './assets/images/third-image.jpg'
 import fourthImage from './assets/images/fourth-image.jpg'
 import fifthImage from './assets/images/fifth-image.jpg'
 
@@ -43,7 +42,8 @@ function App() {
   return (
     <>
       <Header />  
-      <Users users={users}/>    
+      <Users users={users}/> 
+      <Modal />   
     </>
   )
 }
