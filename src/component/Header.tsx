@@ -10,7 +10,7 @@ export function Header(){
                     <input type="text" placeholder="search" className="w-full py-2 rounded-full px-4 shadow-lg"/>
                 </div>
 
-                <button className="px-6 py-2 rounded-full bg-green-500 text-white shadow-xl">
+                <button className="px-6 py-2 rounded-full bg-primary text-white shadow-xl">
                     Add User
                 </button>
             </nav>
