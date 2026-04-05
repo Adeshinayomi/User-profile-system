@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Header } from './component/Header'
 import { Users } from './component/Users'
 import { Modal } from './component/Modal'
@@ -7,43 +8,63 @@ import fourthImage from './assets/images/fourth-image.jpg'
 import fifthImage from './assets/images/fifth-image.jpg'
 
 
-type User={
+function App() {
+
+  const [modalIsOpen,setmodalIsOpen]=useState(false)
+
+  function toggleModal():void{
+    if(modalIsOpen){
+      setmodalIsOpen(false)
+    }else{
+      setmodalIsOpen(true)
+    }
+  }
+
+  type User={
     image:string,
     name:string,
     description:string,
     isOnline:boolean
-}
-const users:User[]=[{
-    image:firstImage,
-    name:'Sophie Bennette',
-    description:'Product designer focused on simplicity',
-    isOnline:true
-},{
+  }
+
+  const [users,setUsers]= useState<User[]>([{
+      image:firstImage,
+      name:'Sophie Bennette',
+      description:'Product designer focused on simplicity',
+      isOnline:true
+  },
+  {
     image:secondImage,
     name:'Benjamin Franklin',
     description:'Product designer focused on simplicity',
     isOnline:true
-},
-{
+  },
+  {
     image:fourthImage,
     name:'Christopher Mary',
     description:'Product designer focused on simplicity',
     isOnline:true
-},
-{
+  },
+  {
     image:fifthImage,
     name:'John Clarke',
     description:'Product designer focused on simplicity',
     isOnline:true
-}]
+  }])
 
-function App() {
-  
+  function addUser(user:User):void{
+    if(user.name !== '' && user.image !== '' && user.description !== ''){
+      setUsers([...users,
+        user]
+      )
+    }
+  }
+
   return (
     <>
-      <Header />  
-      <Users users={users}/> 
-      <Modal />   
+      <Header toggleModal={toggleModal}/>  
+      <Users users={users} /> 
+      <Modal modalIsOpen={modalIsOpen} toggleModal={toggleModal}  addUser={addUser}/>   
     </>
   )
 }
