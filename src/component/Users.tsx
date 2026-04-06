@@ -6,10 +6,12 @@ interface UsersProps {
   users:UserType[] 
   deleteUser:(id:number)=>void,
   toggleStatus:(id:number)=>void
+  searchResult:UserType[]
 }
 
-export function Users({users,deleteUser,toggleStatus}: UsersProps){
+export function Users({users,deleteUser,toggleStatus,searchResult}: UsersProps){
     const [filter,setFilter]=useState('all')
+    let Users=[]
 
     const filterUser=users.filter((user)=>{
         if(filter === 'Offline'){
@@ -20,6 +22,13 @@ export function Users({users,deleteUser,toggleStatus}: UsersProps){
             return true
         }
     })
+
+    if(searchResult.length !== 0){
+        Users=searchResult
+    }else{
+        Users = filterUser
+    }
+
     function loadFilter(){
         if(filterUser.length === 0){
         return (
@@ -48,7 +57,7 @@ export function Users({users,deleteUser,toggleStatus}: UsersProps){
                 
                {loadFilter()}
                 <div className="grid grid-cols-4 gap-2">
-                    {filterUser.map((user) => (
+                    {Users.map((user) => (
                         <User key={user.id} user={user} deleteUser={deleteUser} toggleStatus={toggleStatus}/>
                     ))}
                 </div>                

@@ -51,7 +51,7 @@ function App() {
     description:'Product designer focused on simplicity',
     isOnline:true
   }])
-
+  const [searchResult,setSearchResult]=useState<UserType[]>([])
   function toggleModal():void{
     setmodalIsOpen(prev=>!prev)
   }
@@ -107,6 +107,12 @@ function App() {
     setUsers(newUsers)
   }
 
+  function storeSearchResult(value:string){
+   const result=users.filter((user)=>{
+      return user.firstName.includes(value)
+    })
+    setSearchResult(result)
+  }
   
   function toggleStatus(id:number){
     setUsers(prev =>
@@ -121,8 +127,8 @@ function App() {
 
   return (
     <>
-      <Header toggleModal={toggleModal}/>  
-      <Users deleteUser={deleteUser} toggleStatus={toggleStatus} users={users}/> 
+      <Header toggleModal={toggleModal} storeResult={storeSearchResult}/>  
+      <Users deleteUser={deleteUser} toggleStatus={toggleStatus} users={users} searchResult={searchResult}/> 
       <Modal modalIsOpen={modalIsOpen} toggleModal={toggleModal} error={error}  addUser={addUser}/>   
     </>
   )
