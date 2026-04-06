@@ -1,5 +1,5 @@
 import type { UserType } from "../Types/type"
-
+import deleteIcon from '../assets/icons/icon-delete.svg'
 interface UserProps {
     user: UserType
     deleteUser:(id:number)=>void
@@ -24,9 +24,11 @@ export function User({user,deleteUser}: UserProps){
                         </div>
                     : 'Offline'}
                 </div>
-                <button onClick={()=>{
+                <button className="justify-self-end" onClick={()=>{
                     deleteUser(user.id)
-                }}>delete</button>
+                }}>
+                    <img src={deleteIcon} alt="delete-icon" />
+                </button>
             </div>
         </div>
     )
