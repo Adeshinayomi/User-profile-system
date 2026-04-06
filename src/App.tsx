@@ -1,6 +1,6 @@
 import type { UserType } from "./Types/type"
 import type { Error } from "./Types/error"
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Header } from './component/Header'
 import { Users } from './component/Users'
 import { Modal } from './component/Modal'
@@ -106,6 +106,8 @@ function App() {
     }) 
     setUsers(newUsers)
   }
+
+  
   function toggleStatus(id:number){
     setUsers(prev =>
       prev.map(user =>
@@ -120,7 +122,7 @@ function App() {
   return (
     <>
       <Header toggleModal={toggleModal}/>  
-      <Users users={users} deleteUser={deleteUser} toggleStatus={toggleStatus}/> 
+      <Users deleteUser={deleteUser} toggleStatus={toggleStatus} users={users}/> 
       <Modal modalIsOpen={modalIsOpen} toggleModal={toggleModal} error={error}  addUser={addUser}/>   
     </>
   )

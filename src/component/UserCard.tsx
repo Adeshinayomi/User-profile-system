@@ -1,4 +1,3 @@
-import { use } from "react"
 import type { UserType } from "../Types/type"
 import deleteIcon from '../assets/icons/icon-delete.svg'
 import toggleOffIcon from '../assets/icons/icon-toggle-off.svg'
