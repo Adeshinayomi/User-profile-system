@@ -1,4 +1,5 @@
 import {  useState } from "react"
+import closeIcon from '../assets/icons/icon-close.svg'
 
 type UserType = {
     image: string
@@ -37,6 +38,9 @@ export function Modal({modalIsOpen,addUser,toggleModal}:UserProps){
             </div>
 
             <section className="relative bg-white w-1/2 mx-auto grid px-6 py-5 gap-5 rounded-xl z-20">
+                <div className="justify-self-end" onClick={toggleModal}>
+                    <img src={closeIcon} alt="close-icon" />
+                </div>
                 <div>
                     <h1 className="text-center text-2xl"> New User </h1>
                 </div>
