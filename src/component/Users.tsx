@@ -1,16 +1,11 @@
 import { User } from "./User"   
-type User={
-    image:string,
-    name:string,
-    description:string,
-    isOnline:boolean
-}
-
+import type { UserType } from "../Types/type"
 
 interface UsersProps {
-  users: User[]
+  users: UserType[]
+  deleteUser:(id:number)=>void
 }
-export function Users({users}: UsersProps){
+export function Users({users,deleteUser}: UsersProps){
     return(
         <main className="w-full grid mt-16 py-10">
             <section className="w-5/6 mx-auto grid gap-5">
@@ -21,8 +16,8 @@ export function Users({users}: UsersProps){
                 </div>
 
                 <div className="grid grid-cols-4 gap-2">
-                    {users.map((user, index) => (
-                        <User key={index} user={user} />
+                    {users.map((user) => (
+                        <User key={user.id} user={user} deleteUser={deleteUser}/>
                     ))}
                 </div>                
             </section>

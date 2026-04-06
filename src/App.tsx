@@ -1,3 +1,5 @@
+import type { UserType } from "./Types/type"
+import type { Error } from "./Types/error"
 import { useState } from 'react'
 import { Header } from './component/Header'
 import { Users } from './component/Users'
@@ -9,62 +11,106 @@ import fifthImage from './assets/images/fifth-image.jpg'
 
 
 function App() {
-
+  const [error,setError]=useState<Error>({
+    firstname:'',
+    lastName:'',
+    description:'',
+    image:''
+  })
   const [modalIsOpen,setmodalIsOpen]=useState(false)
 
-  function toggleModal():void{
-    if(modalIsOpen){
-      setmodalIsOpen(false)
-    }else{
-      setmodalIsOpen(true)
-    }
-  }
-
-  type User={
-    image:string,
-    name:string,
-    description:string,
-    isOnline:boolean
-  }
-
-  const [users,setUsers]= useState<User[]>([{
+  const [users,setUsers]= useState<UserType[]>([{
+      id:1,
       image:firstImage,
-      name:'Sophie Bennette',
+      firstName:'Sophie',
+      lastName:'Bennette',
       description:'Product designer focused on simplicity',
       isOnline:true
   },
   {
+    id:2,
     image:secondImage,
-    name:'Benjamin Franklin',
+    firstName:'Benjamin',
+    lastName:'Franklin',
     description:'Product designer focused on simplicity',
     isOnline:true
   },
   {
+    id:3,
     image:fourthImage,
-    name:'Christopher Mary',
+    firstName:'Christopher',
+    lastName:'Mary',    
     description:'Product designer focused on simplicity',
     isOnline:true
   },
   {
+    id:4,
     image:fifthImage,
-    name:'John Clarke',
+    firstName:'John ',
+    lastName:'Clarke',
     description:'Product designer focused on simplicity',
     isOnline:true
   }])
 
-  function addUser(user:User):void{
-    if(user.name !== '' && user.image !== '' && user.description !== ''){
-      setUsers([...users,
-        user]
-      )
-    }
+  function toggleModal():void{
+    setmodalIsOpen(prev=>!prev)
   }
 
+  function addUser(user: UserType): void {
+    const newErrors: Error = {
+      firstname: '',
+      lastName: '',
+      description: '',
+      image: '',
+    };
+
+    if (!user.firstName) {
+      newErrors.firstname = 'Please input first name';
+    }
+
+    if (!user.lastName) {
+      newErrors.lastName = 'Please input last name';
+    }
+
+    if (!user.description) {
+      newErrors.description = 'Please input description';
+    }
+
+    if (!user.image) {
+      newErrors.image = 'Please select image';
+    }
+
+
+    const hasError = Object.values(newErrors).some(err => err !== '');
+
+    if (hasError) {
+      setError(newErrors);
+      return;
+    }
+
+    setUsers(prev => [...prev, user]);
+
+    setError({
+      firstname: '',
+      lastName: '',
+      description: '',
+      image: '',
+    });
+
+    toggleModal();
+  }
+
+  function deleteUser(id:number):void{
+    const newUsers=users.filter((user)=>{
+      return user.id !== id
+    }) 
+    setUsers(newUsers)
+  }
   return (
     <>
       <Header toggleModal={toggleModal}/>  
-      <Users users={users} /> 
-      <Modal modalIsOpen={modalIsOpen} toggleModal={toggleModal}  addUser={addUser}/>   
+      <Users users={users} deleteUser={deleteUser}/> 
+      <Modal modalIsOpen={modalIsOpen} toggleModal={toggleModal} error={error}  addUser={addUser}/>   
     </>
   )
 }
