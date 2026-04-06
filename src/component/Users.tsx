@@ -3,9 +3,10 @@ import type { UserType } from "../Types/type"
 
 interface UsersProps {
   users: UserType[]
-  deleteUser:(id:number)=>void
+  deleteUser:(id:number)=>void,
+  toggleStatus:(id:number)=>void
 }
-export function Users({users,deleteUser}: UsersProps){
+export function Users({users,deleteUser,toggleStatus}: UsersProps){
     return(
         <main className="w-full grid mt-16 py-10">
             <section className="w-5/6 mx-auto grid gap-5">
@@ -17,7 +18,7 @@ export function Users({users,deleteUser}: UsersProps){
 
                 <div className="grid grid-cols-4 gap-2">
                     {users.map((user) => (
-                        <User key={user.id} user={user} deleteUser={deleteUser}/>
+                        <User key={user.id} user={user} deleteUser={deleteUser} toggleStatus={toggleStatus}/>
                     ))}
                 </div>                
             </section>

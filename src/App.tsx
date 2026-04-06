@@ -1,6 +1,6 @@
 import type { UserType } from "./Types/type"
 import type { Error } from "./Types/error"
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Header } from './component/Header'
 import { Users } from './component/Users'
 import { Modal } from './component/Modal'
@@ -106,13 +106,24 @@ function App() {
     }) 
     setUsers(newUsers)
   }
+  function toggleStatus(id:number){
+    setUsers(prev =>
+      prev.map(user =>
+        user.id === id
+          ? { ...user, isOnline: !user.isOnline }
+          : user
+      )
+    );
+
+  }
+
   return (
     <>
       <Header toggleModal={toggleModal}/>  
-      <Users users={users} deleteUser={deleteUser}/> 
+      <Users users={users} deleteUser={deleteUser} toggleStatus={toggleStatus}/> 
       <Modal modalIsOpen={modalIsOpen} toggleModal={toggleModal} error={error}  addUser={addUser}/>   
     </>
   )
-}
+} 
 
 export default App
