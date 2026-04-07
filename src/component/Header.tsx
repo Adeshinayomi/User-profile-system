@@ -1,11 +1,11 @@
-import { useState } from 'react';
 import searchIcon from '../assets/icons/icon-search.svg'
 type Props={
     toggleModal:()=> void;
-    storeResult:(value:string)=>void
+    search:string
+    setsearch:React.Dispatch<React.SetStateAction<string>>
 }
-export function Header({toggleModal,storeResult}:Props){
-    const [searchValue,setSearchValue]=useState('')
+export function Header({toggleModal,search,setsearch}:Props){
+    
     return(
         <header className="w-full grid py-10 bg-white">
             <nav className="w-5/6 mx-auto flex justify-between items-center">
@@ -15,10 +15,8 @@ export function Header({toggleModal,storeResult}:Props){
 
                 <div className="w-1/2 mx-auto flex items-center">
                     <img src={searchIcon} alt="search-icon" className='relative top-0 left-9 accent-gray-200' width={17}/>
-                    <input type="text" placeholder="search" className="w-full py-2 rounded-full px-10 shadow-lg" value={searchValue} onChange={(e)=>{
-                        setSearchValue(e.target.value)
-                    }} onKeyDown={()=>{
-                        storeResult(searchValue)
+                    <input type="text" placeholder="search" className="w-full py-2 rounded-full px-10 shadow-lg" value={search} onChange={(e)=>{
+                        setsearch(e.target.value)
                     }}/>
                 </div>
 

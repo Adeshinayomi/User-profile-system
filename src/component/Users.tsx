@@ -6,31 +6,32 @@ interface UsersProps {
   users:UserType[] 
   deleteUser:(id:number)=>void,
   toggleStatus:(id:number)=>void
-  searchResult:UserType[]
+    search:string
 }
 
-export function Users({users,deleteUser,toggleStatus,searchResult}: UsersProps){
+export function Users({users,deleteUser,toggleStatus,search}: UsersProps){
     const [filter,setFilter]=useState('all')
-    let Users=[]
+    
 
-    const filterUser=users.filter((user)=>{
-        if(filter === 'Offline'){
-            return !user.isOnline
-        }else if(filter === 'Online'){
-            return user.isOnline
-        }else{
-            return true
-        }
-    })
+const filteredUsers = users.filter(user => {
+  const matchesFilter =
+    filter === 'all'
+      ? true
+      : filter === 'online'
+      ? user.isOnline
+      : !user.isOnline;
 
-    if(searchResult.length !== 0){
-        Users=searchResult
-    }else{
-        Users = filterUser
-    }
+  const matchesSearch = user.firstName
+    .toLowerCase()
+    .includes(search.toLowerCase());
+
+  return matchesFilter && matchesSearch;
+});
+
+   
 
     function loadFilter(){
-        if(filterUser.length === 0){
+        if(filteredUsers.length === 0){
         return (
             <p>
                 No Users found
@@ -57,7 +58,7 @@ export function Users({users,deleteUser,toggleStatus,searchResult}: UsersProps){
                 
                {loadFilter()}
                 <div className="grid grid-cols-4 gap-2">
-                    {Users.map((user) => (
+                    {filteredUsers.map((user) => (
                         <User key={user.id} user={user} deleteUser={deleteUser} toggleStatus={toggleStatus}/>
                     ))}
                 </div>                

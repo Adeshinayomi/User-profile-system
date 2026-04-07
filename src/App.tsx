@@ -11,6 +11,8 @@ import fifthImage from './assets/images/fifth-image.jpg'
 
 
 function App() {
+  const [searchValue,setSearchValue]=useState('')
+
   const [error,setError]=useState<Error>({
     firstname:'',
     lastName:'',
@@ -51,7 +53,7 @@ function App() {
     description:'Product designer focused on simplicity',
     isOnline:true
   }])
-  const [searchResult,setSearchResult]=useState<UserType[]>([])
+
   function toggleModal():void{
     setmodalIsOpen(prev=>!prev)
   }
@@ -107,12 +109,6 @@ function App() {
     setUsers(newUsers)
   }
 
-  function storeSearchResult(value:string){
-   const result=users.filter((user)=>{
-      return user.firstName.includes(value)
-    })
-    setSearchResult(result)
-  }
   
   function toggleStatus(id:number){
     setUsers(prev =>
@@ -125,10 +121,11 @@ function App() {
 
   }
 
+
   return (
     <>
-      <Header toggleModal={toggleModal} storeResult={storeSearchResult}/>  
-      <Users deleteUser={deleteUser} toggleStatus={toggleStatus} users={users} searchResult={searchResult}/> 
+      <Header toggleModal={toggleModal}  search={searchValue} setsearch={setSearchValue}/>  
+      <Users deleteUser={deleteUser} toggleStatus={toggleStatus} users={users} search={searchValue}/> 
       <Modal modalIsOpen={modalIsOpen} toggleModal={toggleModal} error={error}  addUser={addUser}/>   
     </>
   )
