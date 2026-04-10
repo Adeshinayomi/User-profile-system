@@ -17,11 +17,11 @@ const filteredUsers = users.filter(user => {
   const matchesFilter =
     filter === 'all'
       ? true
-      : filter === 'online'
+      : filter === 'Online'
       ? user.isOnline
       : !user.isOnline;
 
-  const matchesSearch = user.firstName
+  const matchesSearch = `${user.firstName}${user.lastName}`
     .toLowerCase()
     .includes(search.toLowerCase());
 
@@ -45,13 +45,13 @@ const filteredUsers = users.filter(user => {
         <main className="w-full grid mt-16 py-10">
             <section className="w-5/6 mx-auto grid gap-5">
                 <div className="flex gap-2 ">
-                    <button className="px-4 py-2 rounded-full text-white bg-primary" onClick={()=>{
+                    <button className={`px-4 py-2 rounded-full ${filter==='all'?'bg-primary text-white':'text-black border border-primary'}`} onClick={()=>{
                         setFilter('all')
                     }}>All User</button>
-                    <button className="px-4 py-2 rounded-full text-black border border-primary" onClick={()=>{
+                    <button className={`px-4 py-2 rounded-full ${filter==='Online'?'bg-primary text-white':'text-black border border-primary'}`} onClick={()=>{
                         setFilter('Online')
                     }}>Online</button>
-                    <button className="px-4 py-2 rounded-full text-black border border-primary" onClick={()=>{
+                    <button className={`px-4 py-2 rounded-full ${filter==='Offline'?'bg-primary text-white':'text-black border border-primary'}`} onClick={()=>{
                         setFilter('Offline')
                     }}>Offline</button>
                 </div>
