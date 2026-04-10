@@ -48,21 +48,21 @@ export function Modal({modalIsOpen,addUser,toggleModal,error}:UserProps){
                         <div className="w-full">
                             <input type="text" placeholder="First Name" value={firstName} onChange={(e)=>{
                             setFirstName(e.target.value)
-                            }} className="w-full px-4 py-4 rounded-xl shadow-lg"/>
-                            <span>{error.firstname}</span>
+                            }} className={`${error.firstname?'border-2 border-red-500':''} w-full px-4 py-4 rounded-xl shadow-lg`}/>
+                            <span className="text-red-500 px-2">{error.firstname}</span>
                         </div>
                         <div className="w-full">
-                            <input type="text" placeholder="Last Name" className="w-full px-4 py-4 rounded-xl shadow-lg" value={lastName} onChange={(e)=>{
+                            <input type="text" placeholder="Last Name" className={`${error.lastName?'border-2 border-red-500':''} w-full px-4 py-4 rounded-xl shadow-lg`}value={lastName} onChange={(e)=>{
                                 setLastName(e.target.value)
                             }}/>
-                            <span>{error.lastName}</span>
+                            <span className="text-red-500 px-2">{error.lastName}</span>
                         </div>
                     </div>
 
-                    <textarea className="shadow-xl px-4 rounded-xl" rows={7} value={description} onChange={(e)=>{
+                    <textarea className={`${error.description?'border-2 border-red-500':''} w-full px-4 py-4 rounded-xl shadow-lg`} rows={7} value={description} onChange={(e)=>{
                         setDescription(e.target.value)
                     }}  placeholder="Enter your Description"></textarea>
-                    <span>{error.description}</span>
+                    <span className="text-red-500 px-2">{error.description}</span>
 
                     <div className="grid">
                         <label className="text-md font-medium">Upload image:</label>
@@ -75,7 +75,7 @@ export function Modal({modalIsOpen,addUser,toggleModal,error}:UserProps){
                                 setImage(url);
                             }
                         }}/>
-                        <span>{error.image}</span>
+                        <span className="text-red-500 px-2">{error.image}</span>
                     </div>
                 </div>
 
