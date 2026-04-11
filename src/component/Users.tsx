@@ -57,7 +57,7 @@ const filteredUsers = users.filter(user => {
                 </div>
                 
                {loadFilter()}
-                <div className="grid grid-cols-4 gap-2">
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-2">
                     {filteredUsers.map((user) => (
                         <User key={user.id} user={user} deleteUser={deleteUser} toggleStatus={toggleStatus}/>
                     ))}

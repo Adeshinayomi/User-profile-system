@@ -35,7 +35,7 @@ export function Modal({modalIsOpen,addUser,toggleModal,error}:UserProps){
 
             </div>
 
-            <section className="relative bg-white w-1/2 mx-auto grid px-6 py-5 gap-5 rounded-xl z-20">
+            <section className="relative bg-white md:w-5/6 lg:w-1/2 mx-5 md:mx-auto grid px-6 py-5 gap-2 rounded-xl z-20">
                 <div className="justify-self-end" onClick={toggleModal}>
                     <img src={closeIcon} alt="close-icon" />
                 </div>
@@ -59,7 +59,7 @@ export function Modal({modalIsOpen,addUser,toggleModal,error}:UserProps){
                         </div>
                     </div>
 
-                    <textarea className={`${error.description?'border-2 border-red-500':''} w-full px-4 py-4 rounded-xl shadow-lg`} rows={7} value={description} onChange={(e)=>{
+                    <textarea className={`${error.description?'border-2 border-red-500':''} w-full px-4 py-4 rounded-xl shadow-lg`} rows={5} value={description} onChange={(e)=>{
                         setDescription(e.target.value)
                     }}  placeholder="Enter your Description"></textarea>
                     <span className="text-red-500 px-2">{error.description}</span>
