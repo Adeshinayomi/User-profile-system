@@ -4,10 +4,7 @@ import { useState } from 'react'
 import { Header } from './component/Header'
 import { Users } from './component/Users'
 import { Modal } from './component/Modal'
-import firstImage from './assets/images/first-image.jpg'
-import secondImage from './assets/images/second-image.jpg'
-import fourthImage from './assets/images/fourth-image.jpg'
-import fifthImage from './assets/images/fifth-image.jpg'
+
 
 
 function App() {
@@ -21,38 +18,7 @@ function App() {
   })
   const [modalIsOpen,setmodalIsOpen]=useState(false)
 
-  const [users,setUsers]= useState<UserType[]>([{
-      id:1,
-      image:firstImage,
-      firstName:'Sophie',
-      lastName:'Bennette',
-      description:'Product designer focused on simplicity',
-      isOnline:true
-  },
-  {
-    id:2,
-    image:secondImage,
-    firstName:'Benjamin',
-    lastName:'Franklin',
-    description:'Product designer focused on simplicity',
-    isOnline:true
-  },
-  {
-    id:3,
-    image:fourthImage,
-    firstName:'Christopher',
-    lastName:'Mary',    
-    description:'Product designer focused on simplicity',
-    isOnline:true
-  },
-  {
-    id:4,
-    image:fifthImage,
-    firstName:'John ',
-    lastName:'Clarke',
-    description:'Product designer focused on simplicity',
-    isOnline:true
-  }])
+  const [users,setUsers]= useState<UserType[]>([])
 
   function toggleModal():void{
     setmodalIsOpen(prev=>!prev)
@@ -126,7 +92,7 @@ function App() {
     <>
       <Header toggleModal={toggleModal}  search={searchValue} setsearch={setSearchValue}/>  
       <Users deleteUser={deleteUser} toggleStatus={toggleStatus} users={users} search={searchValue}/> 
-      <Modal modalIsOpen={modalIsOpen} toggleModal={toggleModal} error={error}  addUser={addUser}/>   
+      <Modal modalIsOpen={modalIsOpen} toggleModal={toggleModal}  error={error}  addUser={addUser}/>   
     </>
   )
 } 

@@ -33,7 +33,7 @@ const filteredUsers = users.filter(user => {
     function loadFilter(){
         if(filteredUsers.length === 0){
         return (
-            <p>
+            <p className="text-center text-2xl font-bold text-gray-500">
                 No Users found
             </p>
         )
