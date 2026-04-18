@@ -1,6 +1,6 @@
 import type { UserType } from "./Types/type"
 import type { Error } from "./Types/error"
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Header } from './component/Header'
 import { Users } from './component/Users'
 import { Modal } from './component/Modal'
@@ -18,7 +18,14 @@ function App() {
   })
   const [modalIsOpen,setmodalIsOpen]=useState(false)
 
-  const [users,setUsers]= useState<UserType[]>([])
+  const [users,setUsers]= useState<UserType[]>(()=>{
+    const saved=localStorage.getItem('users');
+
+    if(saved){
+      return JSON.parse(saved)
+    }
+    return[]
+  })
 
   function toggleModal():void{
     setmodalIsOpen(prev=>!prev)
@@ -75,6 +82,9 @@ function App() {
     setUsers(newUsers)
   }
 
+  useEffect(()=>{
+    localStorage.setItem('users',JSON.stringify(users))
+  },[users])
   
   function toggleStatus(id:number){
     setUsers(prev =>
